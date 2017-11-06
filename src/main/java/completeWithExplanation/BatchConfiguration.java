@@ -4,13 +4,10 @@ import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepExecution;
-import org.springframework.batch.core.annotation.BeforeStep;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -58,9 +55,15 @@ public class BatchConfiguration {
         
         reader.setResource(new ClassPathResource("IMS_W36001F_20171023.D"));
         
-        //new DelimitedLineTokenizer 可拉出 較美觀
+        //new DelimitedLineTokenizer 可拉出 
+//        DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
+//        tokenizer.setNames(new String[] { "id", "prodId", "prodSeq", "fundName", "fundType", "fundTypeName", "curr", "currName", "buyDate", "amt", "unit", "refNav", "refNavDate", "refRate", "refAmt", "refIncomeAmt", "refIncomeRate", "cashNetReturn", "cashReturnRate", "profitPoint", "lossPoint", "vSw", "invCode", "failCnt", "kind", "riskAttrib" });
+//        tokenizer.setDelimiter("|");
+        
+        
         reader.setLineMapper(new DefaultLineMapper<DataPracticeVO>() {{
             setLineTokenizer(
+//            		tokenizer
             		new DelimitedLineTokenizer() {{
                 setNames(new String[] { "id", "prodId", "prodSeq", "fundName", "fundType", "fundTypeName", "curr", "currName", "buyDate", "amt", "unit", "refNav", "refNavDate", "refRate", "refAmt", "refIncomeAmt", "refIncomeRate", "cashNetReturn", "cashReturnRate", "profitPoint", "lossPoint", "vSw", "invCode", "failCnt", "kind", "riskAttrib","dataDate" });
                 setDelimiter("|");

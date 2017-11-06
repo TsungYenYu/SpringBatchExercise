@@ -1,7 +1,6 @@
 package completeWithExplanation;
 
 import java.io.Serializable;
-import java.util.Date;
 
 //此例中的預設建構式必須設定 不然會出現 parse 類錯誤
 public class DataPracticeVO implements Serializable {
