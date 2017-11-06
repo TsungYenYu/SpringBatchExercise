@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.StepExecution;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ValidTaskletStep implements Tasklet {
+	
+	private static final Logger log = LoggerFactory.getLogger(ValidTaskletStep.class);
 	
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
@@ -28,13 +32,13 @@ public class ValidTaskletStep implements Tasklet {
 		}
 		br.close();
 		fr.close();
-		System.out.println("readFileRecords : "+ readFileRecords);
+		log.info("*readFileRecords : "+ readFileRecords);
 		
 		if (fileTotalRecords == readFileRecords) {
-			System.out.println(" ExitStatus.EXECUTING ");
+			log.info("*ExitStatus.EXECUTING ");
 			contribution.setExitStatus(ExitStatus.EXECUTING);
         }else {
-        	System.out.println(" ExitStatus.FAILED  ");
+        	log.info("*ExitStatus.FAILED ");
         	contribution.setExitStatus(ExitStatus.FAILED);
         }
         

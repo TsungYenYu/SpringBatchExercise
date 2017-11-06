@@ -2,10 +2,14 @@ package complete;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ItemWriteListener;
 
 public class DataItemWriteListener implements ItemWriteListener<DataPracticeVO>{
 
+	private static final Logger log = LoggerFactory.getLogger(DataItemWriteListener.class);
+	
 	@Override
 	public void beforeWrite(List<? extends DataPracticeVO> items) {
 		// TODO Auto-generated method stub
@@ -13,7 +17,7 @@ public class DataItemWriteListener implements ItemWriteListener<DataPracticeVO>{
 
 	@Override
 	public void afterWrite(List<? extends DataPracticeVO> items) {
-		System.out.println("Insert "+ items.size() + " records after compare. ");
+		log.info("*Insert "+ items.size() + " records after compare. ");
 	}
 
 	@Override
