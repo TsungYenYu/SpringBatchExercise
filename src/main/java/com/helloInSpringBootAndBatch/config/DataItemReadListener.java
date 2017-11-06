@@ -8,7 +8,7 @@ import org.springframework.batch.core.StepExecution;
 
 public class DataItemReadListener implements ItemReadListener<DataPracticeVO>{
 
-	public static int count = 0;
+//	public static int count = 0;
 	@Override
 	public void beforeRead() {
 		// TODO Auto-generated method stub
@@ -17,7 +17,7 @@ public class DataItemReadListener implements ItemReadListener<DataPracticeVO>{
 
 	@Override
 	public void afterRead(DataPracticeVO item) {
-		count++;
+//		count++;
 	}
 
 	@Override
