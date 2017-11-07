@@ -4,8 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //做靜態方法取得檔案中的筆數&日期  只做一次 以防止在物件中重複開啟檔案流
 public  class ToolMethods {
+	
+	private static final Logger log = LoggerFactory.getLogger(ToolMethods.class);
+	
 	public static int getFileTotalRecord() throws IOException {
 		FileReader frH = null;
 		BufferedReader brH = null;
@@ -16,7 +22,7 @@ public  class ToolMethods {
 			brH = new BufferedReader(frH);
 			strH = brH.readLine().split("\\|");
 			resultCount = Integer.valueOf(strH[4].trim());// H 筆數
-			System.out.println("resultCount :" +resultCount);
+			log.info("*resultCount :" +resultCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
